@@ -50,7 +50,6 @@ function addNote() {
     new Note(newIndex);
 }
 
-// Rest of your code (loadNotes, updateLastSavedTime, event listeners) remains unchanged
 
 // Event listener for the "Add Note" button
 document.getElementById('addButton').addEventListener('click', addNote);
