@@ -1,5 +1,3 @@
-// JavaScript for reader.html
-
 // Function to retrieve and display notes from localStorage
 function displayNotes() {
     const notesList = document.getElementById('notesList');
