@@ -1,24 +1,32 @@
-// Function to go back to the index.html
-function goBack() {
-    window.location.href = "index.html";
-}
+// JavaScript for reader.html
 
-// Function to display saved notes from Local Storage
+// Function to retrieve and display notes from localStorage
 function displayNotes() {
-    const notes = JSON.parse(localStorage.getItem("notes")) || [];
-    const noteList = document.getElementById("noteList");
+    const notesList = document.getElementById('notesList');
+    const savedNotes = JSON.parse(localStorage.getItem('notes')) || [];
 
-    if (notes.length === 0) {
-        noteList.innerHTML = "<p>No notes found.</p>";
-    } else {
-        noteList.innerHTML = "";
-        notes.forEach(note => {
-            const noteDiv = document.createElement("div");
-            noteDiv.textContent = `Note: ${note.text}, Saved At: ${note.timestamp}`;
-            noteList.appendChild(noteDiv);
-        });
-    }
+    notesList.innerHTML = '';
+
+    savedNotes.forEach((note) => {
+        const noteText = document.createElement('p');
+        noteText.textContent = note.content;
+        notesList.appendChild(noteText);
+    });
 }
 
-// Call the displayNotes function when the page loads
-window.addEventListener("load", displayNotes);
+// Function to update the last retrieved time
+function updateLastRetrievedTime() {
+    const lastRetrievedTime = document.getElementById('lastRetrievedTime');
+    const currentTime = new Date();
+    lastRetrievedTime.textContent = `Last Retrieved: ${currentTime.toLocaleTimeString()}`;
+}
+
+// Display existing notes and update the last retrieved time
+displayNotes();
+updateLastRetrievedTime();
+
+// Retrieve and display notes every 2 seconds
+setInterval(() => {
+    displayNotes();
+    updateLastRetrievedTime();
+}, 2000);
